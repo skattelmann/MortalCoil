@@ -1,10 +1,11 @@
 import requests
+import networkx as nx
 import numpy as np
 
 def solve():
 	board_info = get_board_info()	#get raw board info
 	board = make_board(board_info)	#generate a matrix from the board info 
-	print board
+	print(board)
 
 def make_board(board_info):
 	[ dimx, dimy, board_string ] = board_info
@@ -14,7 +15,7 @@ def make_board(board_info):
 def get_board_info():
 	username = 'SpaceMonkey'
 	password = 'fuckyou'
-	html_code = requests.get('http://www.hacker.org/coil/', params={'name': username, 'password': password}).content
+	html_code = str(requests.get('http://www.hacker.org/coil/', params={'name': username, 'password': password}).content)
 	info_start = html_code.find('FlashVars') + 18
 	info_end = info_start + html_code[info_start:].find('"')
 	raw_info = html_code[info_start:info_end].split('&')
